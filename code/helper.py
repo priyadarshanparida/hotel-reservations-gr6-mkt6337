@@ -23,14 +23,17 @@ def analyze_categorical_features(dataframe, columns):
     result_df = pd.DataFrame(analysis_results)
     return result_df
 
-def get_human_readable_names():
+def get_human_readable_names(key=None):
     """
-    Returns a dictionary mapping feature names to human-readable names.
+    Returns a dictionary mapping feature names to human-readable names or a specific human-readable name if a key is provided.
+
+    Parameters:
+    key (str, optional): The feature name for which the human-readable name is required.
 
     Returns:
-    dict: A dictionary where keys are feature names and values are human-readable names.
+    dict or str: A dictionary of feature names to human-readable names, or a single human-readable name if a key is provided.
     """
-    return {
+    names = {
         'adr': 'Average Daily Rate',
         'lead_time': 'Lead Time (Days)',
         'stays_in_weekend_nights': 'Weekend Stays (Nights)',
@@ -62,8 +65,15 @@ def get_human_readable_names():
         'reservation_status': 'Reservation Status',
         'reservation_status_date': 'Last Reservation Status Change Date',
         'agent': 'Agent',
-        'company': 'Company'
+        'company': 'Company',
+        'total_revenue': 'Total Revenue',
+        'adr_per_guest': 'Average Daily Rate per Guest',
+        'total_stay_duration': 'Total Stay Duration (Nights)',
+        'cancellation_history_ratio': 'Cancellation History Ratio'
     }
+    if key:
+        return names.get(key, f"Human-readable name for '{key}' not found.")
+    return names
 
 def categorize_guest(row):
     if row['adults'] == 1 and (row['children'] == 0 and row['babies'] == 0):
