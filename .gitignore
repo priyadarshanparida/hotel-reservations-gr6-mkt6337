@@ -3,3 +3,5 @@ __pycache__/
 .ipynb_checkpoints/
 archive/RFM-retail.csv
 chat_context.txt
+artifacts/temp/
+*~*
